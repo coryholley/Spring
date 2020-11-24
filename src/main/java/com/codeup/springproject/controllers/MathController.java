@@ -29,7 +29,7 @@ class MathController {
 
     @GetMapping("/divide/{num1}/by/{num2}")
     @ResponseBody
-    public int divide(@PathVariable int num1, @PathVariable int num2) {
+    public double divide(@PathVariable double num1, @PathVariable double num2) {
         return num1 / num2;
     }
 

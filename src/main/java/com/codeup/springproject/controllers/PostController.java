@@ -14,8 +14,8 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String individualPost(@PathVariable int id) {
-        return "View an individual post";
+    public String individualPost(@PathVariable long id) {
+        return "View an individual post with id: " + id;
     }
 
     @GetMapping("/posts/create")
@@ -24,7 +24,7 @@ public class PostController {
         return "View the form for creating a post";
     }
 
-    @RequestMapping(path = "/posts/create", method = RequestMethod.POST)
+    @PostMapping("/posts/create")
     @ResponseBody
     public String createPost() {
         return "Create a new post";
