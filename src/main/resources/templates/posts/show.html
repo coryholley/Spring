@@ -20,8 +20,14 @@
 
 <h1 class="m-2">Individual Post <span th:text="${post.id}"></span></h1>
 <div class="m-2">
-<h3 th:text="${post.title}"></h3>
-<p th:text="${post.body}"></p>
+    <div class="card" style="width: 18rem;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU"
+             class="card-img-top" alt="...">
+        <div class="card-body">
+            <h3 th:text="${post.title}"></h3>
+            <p th:text="${post.body}"></p>
+        </div>
+    </div>
 </div>
 
 
