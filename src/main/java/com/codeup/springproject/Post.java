@@ -11,6 +11,9 @@ public class Post {
         this.id = id;
     }
 
+    public Post() {
+    }
+
     public String getTitle() {
         return this.title;
     }
@@ -31,7 +34,7 @@ public class Post {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
