@@ -11,18 +11,39 @@
     <link rel="stylesheet" href="bootstrap-grid.css">
     <script src="https://kit.fontawesome.com/3c4a7aa4f0.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Abel&family=Anton&display=swap" rel="stylesheet">
-    <title>Individual Post</title>
-</head>
-<body>
-<div th:replace="partials :: navbar">
-    This div will be *replaced* by the fragment
-</div>
+    <title>Navbar</title>
 
-<h1 class="m-2">Individual Post <span th:text="${post.id}"></span></h1>
-<div class="m-2">
-<h3 th:text="${post.title}"></h3>
-<p th:text="${post.body}"></p>
-</div>
+</head>
+<!-- Navigation -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/posts">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU" alt="hand holding pencil" style="border-radius: 40%; width: 150px; height: 75px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/posts">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/posts/create">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<body>
 
 
 <!-- Optional JavaScript -->
