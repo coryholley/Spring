@@ -19,7 +19,7 @@ public class DiceGameController {
         public String diceGuess(@PathVariable int num, Model model) {
         model.addAttribute("num", num);
         int randomNum = (int)(Math.random() * ((6 - 1) + 1)) + 1;
-        boolean isCorrect = randomNum == num;
+        boolean isCorrect = (randomNum == num);
         model.addAttribute("isCorrect", isCorrect);
         model.addAttribute("randomNum", randomNum);
         return "/userGuess";

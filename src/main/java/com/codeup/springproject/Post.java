@@ -1,9 +1,20 @@
 package com.codeup.springproject;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="posts")
 public class Post {
-    private String title;
-    private String body;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(nullable = false, length = 100)
+    private String title;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String body;
+
 
     public Post(String title, String body, long id) {
         this.title = title;
