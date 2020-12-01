@@ -9,17 +9,17 @@
     This div will be *replaced* by the fragment
 </div>
 
-<section style="height: 100vh" class="mb-5">
+<section style="height: 100vh">
 <h1 class="m-2">All Posts:</h1>
-<div class="container mb-5">
+<div class="container d-flex flex-wrap justify-content-center">
     <div class="mx-2 my-4" th:each="post : ${posts}">
         <div class="card mb-3" style="width: 18rem;">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU"
                  class="card-img-top" alt="...">
             <div class="card-body">
                 <h3 th:text="${post.title}"/>
-                <p th:text="${post.body}"/>
-                <a href="#" class="btn btn-primary">Go to post</a>
+                <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis" th:text="${post.body}"/>
+                <a th:href="@{/posts/(id=${post.id})}" class="btn btn-primary">Go to post</a>
             </div>
         </div>
     </div>

@@ -4,13 +4,13 @@
     <div th:replace="partials :: head"></div>
     <title>Individual Post</title>
 </head>
-<body style="height: 100%">
+<body style="height: 100vh">
 <div th:replace="partials :: navbar">
     This div will be *replaced* by the fragment
 </div>
 
-<div class="container">
-    <h1 class="m-2">Individual Post <span th:text="${post.id}"></span></h1>
+<div class="container" style="height: 100vh">
+    <h1 class="m-2">Individual Post</h1>
     <div class="m-2">
         <div class="card" style="width: 18rem;">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU"
@@ -21,7 +21,11 @@
             </div>
         </div>
     </div>
+    <section class="container">
+        <a th:href="@{/posts/edit/(id=${post.id})}" class="btn btn-info ml-2">Edit Post</a>
+    </section>
 </div>
+
 
 <div th:replace="partials :: footer"></div>
 <div th:replace="partials :: bottom"></div>

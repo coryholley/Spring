@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -22,11 +23,10 @@ public class PostController {
         return "/posts/index";
     }
 
-    @GetMapping("/posts/{id}")
-    public String individualPost(@PathVariable long id, Model model) {
-        Post post3 = new Post("Day three", "This is day three.", 3);
-        id = post3.getId();
-        model.addAttribute("post", post3);
+    @GetMapping("/posts/")
+    public String individualPost(@RequestParam(name = "id") long id, Model model) {
+        Post post = postDao.getOne((long) id);
+        model.addAttribute("post", post);
         return "/posts/show";
     }
 
@@ -36,14 +36,37 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    @ResponseBody
     public String createPost(
             @RequestParam(name = "title-input") String title,
             @RequestParam(name = "body-input") String body
     ) {
         Post post = new Post(title, body);
         Post dbPost = postDao.save(post);
-        return "Created a new Post with the id: " + dbPost.getId();
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/edit")
+    public String viewEditForm(@RequestParam(name = "id") long id, Model model) {
+        Post post = postDao.getOne((long) id);
+        model.addAttribute("post", post);
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/edit")
+    public String submitEditForm(
+            @RequestParam(name = "title-input") String title,
+            @RequestParam(name = "body-input") String body,
+            @RequestParam(name = "id") long id
+    ) {
+        Post post = new Post(title, body, id);
+        Post dbPost = postDao.save(post);
+        return "redirect:/posts";
+    }
+
+    @GetMapping("/posts/delete")
+    public String deletePost(@RequestParam(name = "id") long id, Model model) {
+        postDao.deleteById((long) id);
+        return "redirect:/posts";
     }
 
 }
