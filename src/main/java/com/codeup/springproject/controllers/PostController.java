@@ -1,6 +1,7 @@
 package com.codeup.springproject.controllers;
 
 import com.codeup.springproject.Post;
+import com.codeup.springproject.repos.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,15 +10,15 @@ import java.util.ArrayList;
 
 @Controller
 public class PostController {
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao) {
+        this.postDao = postDao;
+    }
 
     @GetMapping("/posts")
     public String index(Model model) {
-        ArrayList<Post> posts = new ArrayList<>();
-        Post post1 = new Post("Day One", "This is day one.", 1);
-        Post post2 = new Post("Day Two", "This is day two.", 2);
-        posts.add(post1);
-        posts.add(post2);
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postDao.findAll());
         return "/posts/index";
     }
 
@@ -30,15 +31,19 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    @ResponseBody
     public String viewCreateForm() {
-        return "View the form for creating a post";
+        return "posts/create";
     }
 
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPost() {
-        return "Create a new post";
+    public String createPost(
+            @RequestParam(name = "title-input") String title,
+            @RequestParam(name = "body-input") String body
+    ) {
+        Post post = new Post(title, body);
+        Post dbPost = postDao.save(post);
+        return "Created a new Post with the id: " + dbPost.getId();
     }
 
 }

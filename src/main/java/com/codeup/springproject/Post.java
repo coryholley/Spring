@@ -3,7 +3,7 @@ package com.codeup.springproject;
 import javax.persistence.*;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,12 @@ public class Post {
         this.title = title;
         this.body = body;
         this.id = id;
+    }
+
+    // CREATE
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
     }
 
     public Post() {
