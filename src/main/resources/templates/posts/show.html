@@ -11,8 +11,8 @@
 
 <div class="container" style="height: 100vh">
     <h1 class="m-2">Individual Post</h1>
-    <div class="m-2">
-        <div class="card" style="width: 18rem;">
+    <div class="m-2 d-flex justify-content-center">
+        <div class="card" style="width: 30rem;">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU"
                  class="card-img-top" alt="...">
             <div class="card-body">
@@ -21,8 +21,8 @@
             </div>
         </div>
     </div>
-    <section class="container">
-        <a th:href="@{/posts/edit/(id=${post.id})}" class="btn btn-info ml-2">Edit Post</a>
+    <section class="container d-flex justify-content-center">
+        <a th:href="@{/posts/edit/(id=${post.id})}" class="btn btn-info">Edit Post</a>
     </section>
 </div>
 

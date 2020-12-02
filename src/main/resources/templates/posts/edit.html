@@ -12,7 +12,7 @@
 <main class="container" style="height: 100vh">
 
     <h1 class="m-2">EDIT POST:</h1>
-    <form th:action="@{/posts/edit}" th:method="post">
+    <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:method="post">
         <div class="form-group">
             <label for="title-input">Post Title:</label>
             <input id="title-input" name="title-input" class="form-control" type="text" th:value="${post.getTitle()}">
@@ -21,7 +21,7 @@
             <label for="post-body">Post Body:</label>
             <textarea class="form-control" name="body-input" id="post-body" rows="10" cols="60" th:text="${post.getBody()}"></textarea>
         </div>
-        <input type="hidden" name="id" th:value="${post.getId()}">
+<!--        <input type="hidden" name="id" th:value="${post.getId()}">-->
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
     <br>

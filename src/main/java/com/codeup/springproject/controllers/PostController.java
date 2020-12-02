@@ -52,14 +52,16 @@ public class PostController {
         return "posts/edit";
     }
 
-    @PostMapping("/posts/edit")
+    @PostMapping("/posts/{id}/edit")
     public String submitEditForm(
             @RequestParam(name = "title-input") String title,
             @RequestParam(name = "body-input") String body,
-            @RequestParam(name = "id") long id
+            @PathVariable long id
     ) {
-        Post post = new Post(title, body, id);
-        Post dbPost = postDao.save(post);
+        Post dbPost = postDao.getOne(id);
+        dbPost.setTitle(title);
+        dbPost.setBody(body);
+        postDao.save(dbPost);
         return "redirect:/posts";
     }
 
