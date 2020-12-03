@@ -1,12 +1,15 @@
 package com.codeup.springproject.controllers;
 
 import com.codeup.springproject.models.Post;
+import com.codeup.springproject.models.PostImage;
 import com.codeup.springproject.models.User;
 import com.codeup.springproject.repos.PostRepository;
 import com.codeup.springproject.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class PostController {

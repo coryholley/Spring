@@ -21,7 +21,10 @@
             <label for="post-body">Post Body:</label>
             <textarea class="form-control" name="body-input" id="post-body" rows="10" cols="60" th:text="${post.getBody()}"></textarea>
         </div>
-<!--        <input type="hidden" name="id" th:value="${post.getId()}">-->
+<!--        <div class="form-group">-->
+<!--            <label for="image-input">Image Path:</label>-->
+<!--            <input id="image-input" name="image-input" class="form-control mb-1" type="text" th:each="image: ${post.images}" th:value="${image.path}">-->
+<!--        </div>-->
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
     <br>

@@ -20,6 +20,9 @@
             <div class="card-body">
                 <h3 th:text="${post.title}"></h3>
                 <p th:text="${post.body}"></p>
+                <ul>
+                    <li th:each="category: ${post.categories}" th:text="${category.name}"></li>
+                </ul>
                 <p class="text-muted mb-0">Created by: <span th:text="${post.owner.username}"></span></p>
             </div>
         </div>
