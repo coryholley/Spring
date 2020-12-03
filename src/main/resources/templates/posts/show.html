@@ -23,7 +23,7 @@
                 <ul>
                     <li th:each="category: ${post.categories}" th:text="${category.name}"></li>
                 </ul>
-                <p class="text-muted mb-0">Created by: <span th:text="${post.owner.username}"></span></p>
+                <p class="text-muted mb-0 small">Created by: <span th:text="${post.owner.username}"></span></p>
             </div>
         </div>
     </div>
