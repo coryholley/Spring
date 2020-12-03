@@ -1,5 +1,6 @@
-package com.codeup.springproject;
+package com.codeup.springproject.models;
 
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -18,20 +19,26 @@ public class Post {
     @OneToOne
     private User owner;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostImage> images;
+
     public Post() { }
 
-    public Post(String title, String body, long id, User owner) {
+    //READ
+    public Post(String title, String body, long id, User owner, List<PostImage> images) {
         this.title = title;
         this.body = body;
         this.id = id;
         this.owner = owner;
+        this.images = images;
     }
 
     // CREATE
-    public Post(String title, String body, User owner) {
+    public Post(String title, String body, User owner, List<PostImage> images) {
         this.title = title;
         this.body = body;
         this.owner = owner;
+        this.images = images;
     }
 
     public String getTitle() {
@@ -64,6 +71,14 @@ public class Post {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public List<PostImage> getImages() {
+        return images;
+    }
+
+    public void setImages(List<PostImage> images) {
+        this.images = images;
     }
 
 }

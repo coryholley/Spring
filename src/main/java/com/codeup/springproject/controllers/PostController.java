@@ -1,15 +1,12 @@
 package com.codeup.springproject.controllers;
 
-import com.codeup.springproject.Post;
-import com.codeup.springproject.User;
+import com.codeup.springproject.models.Post;
+import com.codeup.springproject.models.User;
 import com.codeup.springproject.repos.PostRepository;
 import com.codeup.springproject.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Controller
 public class PostController {
@@ -45,7 +42,7 @@ public class PostController {
             @RequestParam(name = "body-input") String body
     ) {
         User user = userDao.getOne(1L);
-        Post post = new Post(title, body, user);
+        Post post = new Post(title, body, user, null);
         Post dbPost = postDao.save(post);
         return "redirect:/posts";
     }
