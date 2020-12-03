@@ -40,7 +40,7 @@ public class PostController {
             @RequestParam(name = "title-input") String title,
             @RequestParam(name = "body-input") String body
     ) {
-        Post post = new Post(title, body);
+        Post post = new Post(title, body, null);
         Post dbPost = postDao.save(post);
         return "redirect:/posts";
     }
