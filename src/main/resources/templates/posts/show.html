@@ -18,6 +18,7 @@
             <div class="card-body">
                 <h3 th:text="${post.title}"></h3>
                 <p th:text="${post.body}"></p>
+                <p>Created by: <span th:text="${post.owner.username}"></span></p>
             </div>
         </div>
     </div>

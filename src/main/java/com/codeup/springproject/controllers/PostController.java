@@ -1,7 +1,9 @@
 package com.codeup.springproject.controllers;
 
 import com.codeup.springproject.Post;
+import com.codeup.springproject.User;
 import com.codeup.springproject.repos.PostRepository;
+import com.codeup.springproject.repos.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,11 @@ import java.util.Optional;
 @Controller
 public class PostController {
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
@@ -40,7 +44,8 @@ public class PostController {
             @RequestParam(name = "title-input") String title,
             @RequestParam(name = "body-input") String body
     ) {
-        Post post = new Post(title, body, null);
+        User user = userDao.getOne(1L);
+        Post post = new Post(title, body, user);
         Post dbPost = postDao.save(post);
         return "redirect:/posts";
     }
