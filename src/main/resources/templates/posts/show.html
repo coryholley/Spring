@@ -28,7 +28,9 @@
         </div>
     </div>
     <section class="container d-flex justify-content-center">
-        <a th:href="@{/posts/edit/(id=${post.id})}" class="btn btn-info">Edit Post</a>
+        <a class="btn btn-outline-secondary" th:href="@{/posts/(id=${post.id - 1})}" role="button">Previous Post</a>
+        <a th:href="@{/posts/edit/(id=${post.id})}" class="btn btn-info mx-3">Edit Post</a>
+        <a class="btn btn-outline-secondary" th:href="@{/posts/(id=${post.id + 1})}" role="button">Next Post</a>
     </section>
 </div>
 

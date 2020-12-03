@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 
 @Controller
@@ -31,6 +32,7 @@ public class PostController {
     public String individualPost(@RequestParam(name = "id") long id, Model model) {
         Post post = postDao.getOne((long) id);
         model.addAttribute("post", post);
+//        boolean hasPrevious = ((post.getId() - 1) != null);
         return "/posts/show";
     }
 

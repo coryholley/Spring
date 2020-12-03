@@ -6,11 +6,11 @@
 </head>
 <body>
 
-<h1 if th:if="${isCorrect}">
+<h1 th:if="${isCorrect}">
     Congratulations! Your number: <span th:text="${num}"></span> matched the dice roll of: <span th:text="${randomNum}"></span>
 </h1>
 
-<h1 if th:if="${!isCorrect}">
+<h1 th:if="${!isCorrect}">
     Sorry, your number: <span th:text="${num}"></span> did not match the dice roll of: <span th:text="${randomNum}"></span>
 </h1>
 
