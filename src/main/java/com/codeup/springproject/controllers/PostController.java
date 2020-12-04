@@ -32,7 +32,10 @@ public class PostController {
     public String individualPost(@RequestParam(name = "id") long id, Model model) {
         Post post = postDao.getOne((long) id);
         model.addAttribute("post", post);
-//        boolean hasPrevious = ((post.getId() - 1) != null);
+        boolean hasPrevious = postDao.existsById(post.getId() - 1);
+        boolean hasNext = postDao.existsById(post.getId() + 1);
+        model.addAttribute("hasNext", hasNext);
+        model.addAttribute("hasPrevious", hasPrevious);
         return "/posts/show";
     }
 

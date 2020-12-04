@@ -12,9 +12,9 @@
 <div class="container" style="height: 100vh">
     <h1 class="m-2">Individual Post</h1>
     <div class="m-2 d-flex justify-content-center">
-        <div class="card" style="width: 50rem">
+        <div class="card" style="width: 55rem">
             <div class="d-flex row p-4 flex-wrap justify-content-center">
-                <img class="img-thumbnail mr-1" style="width: 250px; height: 210px" th:each="image: ${post.images}"
+                <img class="img-thumbnail mr-1" style="width: 260px; height: 210px" th:each="image: ${post.images}"
                      th:src="${image.path}">
             </div>
             <div class="card-body">
@@ -28,9 +28,14 @@
         </div>
     </div>
     <section class="container d-flex justify-content-center">
-        <a class="btn btn-outline-secondary" th:href="@{/posts/(id=${post.id - 1})}" role="button">Previous Post</a>
+
+        <a th:if="${hasPrevious}" class="btn btn-outline-secondary" th:href="@{/posts/(id=${post.id - 1})}" role="button">Previous Post</a>
+        <a th:if="${!hasPrevious}" class="btn btn-outline-secondary" th:href="@{/posts}" role="button">Previous Post</a>
+
         <a th:href="@{/posts/edit/(id=${post.id})}" class="btn btn-info mx-3">Edit Post</a>
-        <a class="btn btn-outline-secondary" th:href="@{/posts/(id=${post.id + 1})}" role="button">Next Post</a>
+
+        <a th:if="${hasNext}" class="btn btn-outline-secondary" th:href="@{/posts/(id=${post.id + 1})}" role="button">Next Post</a>
+        <a th:if="${!hasNext}" class="btn btn-outline-secondary" th:href="@{/posts}" role="button">Next Post</a>
     </section>
 </div>
 
