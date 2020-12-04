@@ -5,6 +5,7 @@ import com.codeup.springproject.models.PostImage;
 import com.codeup.springproject.models.User;
 import com.codeup.springproject.repos.PostRepository;
 import com.codeup.springproject.repos.UserRepository;
+import com.codeup.springproject.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,12 @@ import java.util.List;
 public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
@@ -47,11 +50,6 @@ public class PostController {
         return "posts/search";
     }
 
-//    @PostMapping("posts/search")
-//    public String getSearchedPosts() {
-//        return "posts/search";
-//    }
-
     @GetMapping("/posts/create")
     public String viewCreateForm(Model viewModel) {
         viewModel.addAttribute("post", new Post());
@@ -63,6 +61,7 @@ public class PostController {
         User userDb = userDao.getOne(1L);
         postToBeSaved.setOwner(userDb);
         Post dbPost = postDao.save(postToBeSaved);
+        emailService.prepareAndSend(dbPost, "Ad has been created", "You can find it with the id of " + dbPost.getId());
         return "redirect:/posts";
     }
 
@@ -75,14 +74,12 @@ public class PostController {
 
     @PostMapping("/posts/{id}/edit")
     public String submitEditForm(
-            @RequestParam(name = "title-input") String title,
-            @RequestParam(name = "body-input") String body,
-            @PathVariable long id
+            @PathVariable long id,
+            @ModelAttribute Post postToBeUpdated
     ) {
-        Post dbPost = postDao.getOne(id);
-        dbPost.setTitle(title);
-        dbPost.setBody(body);
-        postDao.save(dbPost);
+        User user = userDao.getOne(1L);
+        postToBeUpdated.setOwner(user);
+        postDao.save(postToBeUpdated);
         return "redirect:/posts";
     }
 
