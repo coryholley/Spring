@@ -37,18 +37,16 @@ public class PostController {
     }
 
     @GetMapping("/posts/create")
-    public String viewCreateForm() {
+    public String viewCreateForm(Model viewModel) {
+        viewModel.addAttribute("post", new Post());
         return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String createPost(
-            @RequestParam(name = "title-input") String title,
-            @RequestParam(name = "body-input") String body
-    ) {
-        User user = userDao.getOne(1L);
-        Post post = new Post(title, body, user, null);
-        Post dbPost = postDao.save(post);
+    public String createPost(@ModelAttribute Post postToBeSaved) {
+        User userDb = userDao.getOne(1L);
+        postToBeSaved.setOwner(userDb);
+        Post dbPost = postDao.save(postToBeSaved);
         return "redirect:/posts";
     }
 
