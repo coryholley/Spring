@@ -39,6 +39,19 @@ public class PostController {
         return "/posts/show";
     }
 
+    @PostMapping("/posts/search")
+    public String viewSearchedPosts(@RequestParam(name = "searchTerm") String searchTerm, Model viewModel) {
+        searchTerm = "%"+searchTerm+"%";
+        List<Post> dbPosts = postDao.findAllByTitleIsLike(searchTerm);
+        viewModel.addAttribute("posts", dbPosts);
+        return "posts/search";
+    }
+
+//    @PostMapping("posts/search")
+//    public String getSearchedPosts() {
+//        return "posts/search";
+//    }
+
     @GetMapping("/posts/create")
     public String viewCreateForm(Model viewModel) {
         viewModel.addAttribute("post", new Post());

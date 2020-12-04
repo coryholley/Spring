@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="partials :: head"></div>
+    <title>Searched Posts</title>
+</head>
+<body>
+<div th:replace="partials :: navbar">
+    This div will be *replaced* by the fragment
+</div>
+
+<section class="container" style="height: 100vh">
+    <h1 class="m-2">Found:</h1>
+    <div class="container d-flex flex-wrap justify-content-center">
+        <div class="mx-2 my-4" th:each="post : ${posts}">
+            <div class="card mb-3" style="width: 55rem;">
+                <div class="d-flex row p-4 flex-wrap justify-content-center">
+                    <img class="img-thumbnail mr-1" style="width: 260px; height: 210px" th:each="image: ${post.images}"
+                         th:src="${image.path}">
+                </div>
+                <div class="card-body">
+                    <h3 th:text="${post.title}"/>
+                    <p style="white-space: nowrap; overflow: hidden;text-overflow: ellipsis" th:text="${post.body}"/>
+                    <a th:href="@{/posts/(id=${post.id})}" class="btn btn-primary">Go to post</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="partials :: footer"></footer>
+<div th:replace="partials :: bottom"></div>
+</body>
+</html>
