@@ -13,26 +13,26 @@
 
     <h1 class="m-2">Create a Post:</h1>
 
-    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
-            <div class="form-group">
-                <label for="title-input">Post Title:</label>
-                <input id="title-input" th:field="*{title}" class="form-control" type="text" placeholder="Title">
-            </div>
-            <div class="form-group">
-                <label for="post-body">Post Body:</label>
-                <textarea class="form-control" th:field="*{body}" id="post-body" rows="14" cols="60"></textarea>
-            </div>
+    <form id="createForm" th:action="@{/posts/create}" th:method="post" th:object="${post}">
         <div class="form-group">
-            <label for="image-input">Post Image:</label>
-            <input id="image-input" name="image-input" class="form-control" type="text" placeholder="Image Path"> <button id="addMoreImages" type="button" class="badge badge-dark">Add</button>
-            <input id="image-input2" name="image-input2" class="form-control" type="text" placeholder="Image Path">
+            <label for="title-input">Post Title:</label>
+            <input id="title-input" th:field="*{title}" class="form-control" type="text" placeholder="Title">
         </div>
+        <div class="form-group">
+            <label for="post-body">Post Body:</label>
+            <textarea class="form-control" th:field="*{body}" id="post-body" rows="14" cols="60"></textarea>
+        </div>
+        <div id="formImages" class="form-group">
+            <label for="image-input">Post Image:</label>
+            <input id="image-input" name="image-input" class="form-control mb-1" type="text" placeholder="Image Path">
+        </div>
+        <button id="addMoreImages" type="button" class="badge badge-pill badge-dark mb-1">Add</button><br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 </main>
 
 <footer class="mt-3" th:replace="partials :: footer"></footer>
-<div th:replace="partials :: bottom"></div>
+<div th:replace="partials :: scripts"></div>
 </body>
 </html>
