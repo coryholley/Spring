@@ -64,11 +64,30 @@ public class PostController {
     @PostMapping("/posts/create")
     public String createPost(
             @ModelAttribute Post postToBeSaved,
-            @RequestParam(name = "image-input") String imagePath
+            @RequestParam(name = "image-input", required = false) String imagePath,
+            @RequestParam(name = "image-input1", required = false) String imagePath1,
+            @RequestParam(name = "image-input2", required = false) String imagePath2
             ) {
-        PostImage imageOne = new PostImage(imagePath, postToBeSaved);
         List<PostImage> newImages = new ArrayList<>();
-        newImages.add(imageOne);
+        if (imagePath.equals("") || imagePath1.equals("") || imagePath2.equals("")) {
+            imagePath = "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+            PostImage imageOne = new PostImage(imagePath, postToBeSaved);
+            imagePath1 = "https://images.pexels.com/photos/413960/pexels-photo-413960.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+            PostImage imageTwo = new PostImage(imagePath1, postToBeSaved);
+            imagePath2 = "https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+            PostImage imageThree = new PostImage(imagePath2, postToBeSaved);
+            newImages.add(imageOne);
+            newImages.add(imageTwo);
+            newImages.add(imageThree);
+        } else {
+            PostImage imageOne = new PostImage(imagePath, postToBeSaved);
+            newImages.add(imageOne);
+            PostImage imageTwo = new PostImage(imagePath1, postToBeSaved);
+            newImages.add(imageTwo);
+            PostImage imageThree = new PostImage(imagePath2, postToBeSaved);
+            newImages.add(imageThree);
+        }
+
         postToBeSaved.setImages(newImages);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeSaved.setOwner(user);
