@@ -3,6 +3,7 @@ package com.codeup.springproject.controllers;
 import com.codeup.springproject.models.Post;
 import com.codeup.springproject.models.PostImage;
 import com.codeup.springproject.models.User;
+import com.codeup.springproject.repos.ImageRepository;
 import com.codeup.springproject.repos.PostRepository;
 import com.codeup.springproject.repos.UserRepository;
 import com.codeup.springproject.services.EmailService;
@@ -11,18 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Null;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final ImageRepository imageDao;
     private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
+    public PostController(PostRepository postDao, UserRepository userDao, ImageRepository imageDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.imageDao = imageDao;
         this.emailService = emailService;
     }
 
@@ -58,9 +62,16 @@ public class PostController {
     }
 
     @PostMapping("/posts/create")
-    public String createPost(@ModelAttribute Post postToBeSaved) {
-        User userDb = userDao.getOne(1L);
-        postToBeSaved.setOwner(userDb);
+    public String createPost(
+            @ModelAttribute Post postToBeSaved,
+            @RequestParam(name = "image-input") String imagePath
+            ) {
+        PostImage imageOne = new PostImage(imagePath, postToBeSaved);
+        List<PostImage> newImages = new ArrayList<>();
+        newImages.add(imageOne);
+        postToBeSaved.setImages(newImages);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        postToBeSaved.setOwner(user);
         Post dbPost = postDao.save(postToBeSaved);
         emailService.prepareAndSend(dbPost, "Ad has been created", "You can find it with the id of " + dbPost.getId());
         return "redirect:/posts";
