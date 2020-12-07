@@ -14,7 +14,7 @@
 <div class="container d-flex flex-wrap justify-content-center">
     <div class="mx-2 my-4" th:each="post : ${posts}">
         <div class="card mb-3" style="width: 18rem;">
-            <img src="pexels-negative-space-34601.jpg"
+            <img th:src="${post.images[0].getPath()}"
                  class="card-img-top" alt="...">
             <div class="card-body">
                 <h3 th:text="${post.title}"/>

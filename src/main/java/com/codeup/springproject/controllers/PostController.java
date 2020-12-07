@@ -6,6 +6,7 @@ import com.codeup.springproject.models.User;
 import com.codeup.springproject.repos.PostRepository;
 import com.codeup.springproject.repos.UserRepository;
 import com.codeup.springproject.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -77,7 +78,7 @@ public class PostController {
             @PathVariable long id,
             @ModelAttribute Post postToBeUpdated
     ) {
-        User user = userDao.getOne(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeUpdated.setOwner(user);
         postDao.save(postToBeUpdated);
         return "redirect:/posts";
