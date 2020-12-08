@@ -63,32 +63,19 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(
-            @ModelAttribute Post postToBeSaved,
-            @RequestParam(name = "image-input", required = false) String imagePath,
-            @RequestParam(name = "image-input1", required = false) String imagePath1,
-            @RequestParam(name = "image-input2", required = false) String imagePath2
+            @ModelAttribute Post postToBeSaved
             ) {
-        List<PostImage> newImages = new ArrayList<>();
-        if (imagePath.equals("") || imagePath1.equals("") || imagePath2.equals("")) {
-            imagePath = "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
-            PostImage imageOne = new PostImage(imagePath, postToBeSaved);
-            imagePath1 = "https://images.pexels.com/photos/413960/pexels-photo-413960.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
-            PostImage imageTwo = new PostImage(imagePath1, postToBeSaved);
-            imagePath2 = "https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
-            PostImage imageThree = new PostImage(imagePath2, postToBeSaved);
-            newImages.add(imageOne);
-            newImages.add(imageTwo);
-            newImages.add(imageThree);
-        } else {
-            PostImage imageOne = new PostImage(imagePath, postToBeSaved);
-            newImages.add(imageOne);
-            PostImage imageTwo = new PostImage(imagePath1, postToBeSaved);
-            newImages.add(imageTwo);
-            PostImage imageThree = new PostImage(imagePath2, postToBeSaved);
-            newImages.add(imageThree);
-        }
-
-        postToBeSaved.setImages(newImages);
+//        List<PostImage> newImages = new ArrayList<>();
+//        String imagePath = "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+//        PostImage imageOne = new PostImage(imagePath, postToBeSaved);
+//        String imagePath1 = "https://images.pexels.com/photos/413960/pexels-photo-413960.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+//        PostImage imageTwo = new PostImage(imagePath1, postToBeSaved);
+//        String imagePath2 = "https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500";
+//        PostImage imageThree = new PostImage(imagePath2, postToBeSaved);
+//        newImages.add(imageOne);
+//        newImages.add(imageTwo);
+//        newImages.add(imageThree);
+//        postToBeSaved.setImages(newImages);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeSaved.setOwner(user);
         Post dbPost = postDao.save(postToBeSaved);
@@ -114,8 +101,8 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @GetMapping("/posts/delete")
-    public String deletePost(@RequestParam(name = "id") long id, Model model) {
+    @PostMapping("/posts/{id}/delete")
+    public String deletePost(@PathVariable long id, Model model) {
         postDao.deleteById((long) id);
         return "redirect:/posts";
     }

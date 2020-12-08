@@ -10,11 +10,11 @@
 </div>
 
 <section class="container">
-<h1 class="m-2">All Posts:</h1>
+<h1 class="m-2">Latest Posts</h1>
 <div class="container d-flex flex-wrap justify-content-center">
     <div class="mx-2 my-4" th:each="post : ${posts}">
         <div class="card mb-3" style="width: 18rem;">
-            <img th:src="${post.images[0].getPath()}"
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU"
                  class="card-img-top" alt="...">
             <div class="card-body">
                 <h3 th:text="${post.title}"/>

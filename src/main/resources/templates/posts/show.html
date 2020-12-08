@@ -14,8 +14,7 @@
     <div class="m-2 d-flex justify-content-center">
         <div class="card" style="width: 55rem">
             <div class="d-flex row p-4 flex-wrap justify-content-center">
-                <img class="img-thumbnail mr-1" style="width: 260px; height: 210px" th:each="image: ${post.images}"
-                     th:src="${image.path}">
+                <img class="img-thumbnail mr-1" style="width: 260px; height: 210px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOs4TDizXdsMqTXYdIshUHW83cpQEa14fvLw&usqp=CAU">
             </div>
             <div class="card-body">
                 <p th:text="${post.body}"></p>

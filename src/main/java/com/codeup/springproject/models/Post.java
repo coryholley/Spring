@@ -50,6 +50,12 @@ public class Post {
         this.images = images;
     }
 
+    public Post(String title, String body, User owner) {
+        this.title = title;
+        this.body = body;
+        this.owner = owner;
+    }
+
     public String getTitle() {
         return this.title;
     }

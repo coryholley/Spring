@@ -24,8 +24,9 @@
         <button type="submit" class="btn btn-info">Submit</button>
     </form>
     <br>
-    <a th:href="@{/posts/delete/(id=${post.id})}" class="btn btn-danger">Delete Post</a>
-
+    <form th:action="@{/posts/{id}/delete(id=${post.id})}" th:method="post">
+    <button class="btn btn-danger" type="submit">Delete Post</button>
+    </form>
 </main>
 
 <footer class="mt-3" th:replace="partials :: footer"></footer>
