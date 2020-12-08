@@ -93,7 +93,7 @@ public class PostController {
         postToBeSaved.setOwner(user);
         Post dbPost = postDao.save(postToBeSaved);
         emailService.prepareAndSend(dbPost, "Ad has been created", "You can find it with the id of " + dbPost.getId());
-        return "redirect:posts";
+        return "redirect:/posts";
     }
 
     @GetMapping("/posts/edit")
@@ -111,13 +111,13 @@ public class PostController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postToBeUpdated.setOwner(user);
         postDao.save(postToBeUpdated);
-        return "redirect:posts";
+        return "redirect:/posts";
     }
 
     @GetMapping("/posts/delete")
     public String deletePost(@RequestParam(name = "id") long id, Model model) {
         postDao.deleteById((long) id);
-        return "redirect:posts";
+        return "redirect:/posts";
     }
 
 }
